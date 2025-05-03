@@ -1,6 +1,9 @@
 import numpy as np
 
 def _unbroadcast(grad,shape):
+    while len(grad.shape) > len(shape):
+        grad = np.sum(grad,axis=0)
+        
     for i,dim in enumerate(shape):
         if dim == 1:
             grad = np.sum(grad,axis=i,keepdims=True)
